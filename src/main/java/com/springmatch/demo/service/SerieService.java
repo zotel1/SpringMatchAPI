@@ -1,6 +1,7 @@
 package com.springmatch.demo.service;
 
 import com.springmatch.demo.dto.SerieDTO;
+import com.springmatch.demo.model.Serie;
 import com.springmatch.demo.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,17 @@ public class SerieService {
     private SerieRepository repository;
 
     public List<SerieDTO> obtenerTodasLasSeries() {
-        return repository.findAll().stream()
+        return convierteDatos(repository.findAll());
+
+    }
+
+    public List<SerieDTO> obtenerTop5() {
+        return convierteDatos(repository.findTop5ByOrderByEvaluacionDesc());
+    }
+
+    public List<SerieDTO> convierteDatos(List<Serie> serie) {
+        return serie.stream()
                 .map(s -> new SerieDTO(s.getTitulo(), s.getTotalTemporadas(), s.getEvaluacion(), s.getPoster(), s.getGenero(), s.getActores(), s.getSinopsis()))
                 .collect(Collectors.toList());
-
     }
 }
