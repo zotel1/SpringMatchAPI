@@ -1,5 +1,6 @@
 package com.springmatch.demo.service;
 
+import com.springmatch.demo.dto.EpisodioDTO;
 import com.springmatch.demo.dto.SerieDTO;
 import com.springmatch.demo.model.Serie;
 import com.springmatch.demo.repository.SerieRepository;
@@ -45,4 +46,13 @@ public class SerieService {
     }
 
 
+    public List<EpisodioDTO> obtenerTodasLasTemporadas(Long id) {
+        Optional<Serie> serie = repository.findById(id);
+        if (serie.isPresent()) {
+            Serie s = serie.get();
+            return s.getEpisodios().stream().map(e -> new EpisodioDTO(e.getTemporada(), e.getTitulo(), e.getNumeroEpisodio()))
+                    .collect(Collectors.toList());
+        }
+        return null;
+    }
 }

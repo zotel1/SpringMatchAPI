@@ -1,6 +1,8 @@
 package com.springmatch.demo.controller;
 
+import com.springmatch.demo.dto.EpisodioDTO;
 import com.springmatch.demo.dto.SerieDTO;
+import com.springmatch.demo.model.Episodio;
 import com.springmatch.demo.service.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,5 +41,10 @@ public class SerieController {
         return servicio.obtenerPorId(id);
     }
 
+    @GetMapping("/{id}/temporadas/todas")
+    public List<EpisodioDTO> obtenerTodasLasTemporadas(@PathVariable Long id) {
+        return servicio.obtenerTodasLasTemporadas(id);
+
+    }
 }
 
