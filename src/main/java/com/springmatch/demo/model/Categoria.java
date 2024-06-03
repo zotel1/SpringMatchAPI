@@ -19,7 +19,7 @@ public enum Categoria {
 
     public static Categoria fromString(String text) {
         for (Categoria categoria : Categoria.values()) {
-            if (Categoria.categoriaOmdb.equalsIgnoreCase(text)) {
+            if (categoria.categoriaOmdb.equalsIgnoreCase(text)) {
                 return categoria;
             }
         }
@@ -28,7 +28,7 @@ public enum Categoria {
 
     public static Categoria fromEspanol(String text) {
         for (Categoria categoria : Categoria.values()) {
-            if ( Categoria.categoriaEspanol.equalsIgnoreCase(text)) {
+            if ( categoria.categoriaEspanol.equalsIgnoreCase(text)) {
                 return categoria;
             }
         }
