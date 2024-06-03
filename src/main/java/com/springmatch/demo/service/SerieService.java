@@ -2,6 +2,7 @@ package com.springmatch.demo.service;
 
 import com.springmatch.demo.dto.EpisodioDTO;
 import com.springmatch.demo.dto.SerieDTO;
+import com.springmatch.demo.model.Categoria;
 import com.springmatch.demo.model.Serie;
 import com.springmatch.demo.repository.SerieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,10 @@ public class SerieService {
         return repository.obtenerTemporadasPorNumero(id, numeroTemporada).stream()
                 .map(e -> new EpisodioDTO(e.getTemporada(), e.getTitulo(), e.getNumeroEpisodio()))
                 .collect(Collectors.toList());
+    }
+
+    public List<SerieDTO> obtenerSeriesPorCategoria(String nombreGenero) {
+        Categoria categoria = Categoria.fromEspanol(nombreGenero);
+        return convierteDatos(repository.findByGenero(categoria));
     }
 }
